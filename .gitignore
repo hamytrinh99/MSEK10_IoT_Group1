@@ -1,0 +1,8 @@
+*.wav
+*.pkl
+*.zip
+music
+stash
+tmp
+__pycache__
+.idea
