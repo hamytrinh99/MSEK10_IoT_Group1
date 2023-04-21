@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 import requests
 
 import config
+import db
 import voice
 
 
@@ -26,12 +27,15 @@ def turn_light_on(room):
         GPIO.output(config.LED_PIN_1, GPIO.HIGH)
         GPIO.output(config.LED_PIN_2, GPIO.HIGH)
         voice.speak('Vâng, em bật đèn rồi ạ')
+        db.upsert_led_status(1, 1)
     elif room == 'ngủ':
         GPIO.output(config.LED_PIN_1, GPIO.HIGH)
         voice.speak('Vâng, em bật đèn phòng ngủ rồi ạ')
+        db.update_single_led(1, 1)
     else:
         GPIO.output(config.LED_PIN_2, GPIO.HIGH)
         voice.speak('Vâng, em bật đèn phòng khách rồi ạ')
+        db.update_single_led(2, 1)
 
 
 def turn_light_off(room):
@@ -39,12 +43,15 @@ def turn_light_off(room):
         GPIO.output(config.LED_PIN_1, GPIO.LOW)
         GPIO.output(config.LED_PIN_2, GPIO.LOW)
         voice.speak('Vâng, em tắt đèn rồi ạ')
+        db.upsert_led_status(0, 0)
     elif room == 'ngủ':
         GPIO.output(config.LED_PIN_1, GPIO.LOW)
         voice.speak('Vâng, em tắt đèn phòng ngủ rồi ạ')
+        db.update_single_led(1, 0)
     else:
         GPIO.output(config.LED_PIN_2, GPIO.LOW)
         voice.speak('Vâng, em tắt đèn phòng khách rồi ạ')
+        db.update_single_led(2, 0)
 
 
 def check_weather():
