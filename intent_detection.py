@@ -8,12 +8,13 @@ light_off_intent = r'tắt.*(?:đèn|bóng|điện)'
 light_on_room_intent = r'(?:mở|bật).*(?:đèn|bóng|điện).*?(ngủ|khách)'
 light_off_room_intent = r'tắt.*(?:đèn|bóng|điện).*?(ngủ|khách)'
 weather_intent = r'thời tiết'
+time_intent = r'(?:mấy|bao nhiêu).*(?:giờ)'
 stop_intent = r'(?:[dr]ừng|im|câm|trật tự|tắt)'
 
 intent_list = [music_on_intent, music_off_intent, light_on_room_intent, light_off_room_intent,
-               light_on_intent, light_off_intent, weather_intent, stop_intent]
+               light_on_intent, light_off_intent, weather_intent, time_intent, stop_intent]
 intent_key = ['MUSIC_ON', 'MUSIC_OFF', 'LIGHT_ON',
-              'LIGHT_OFF', 'LIGHT_ON', 'LIGHT_OFF', 'WEATHER', 'STOP']
+              'LIGHT_OFF', 'LIGHT_ON', 'LIGHT_OFF', 'WEATHER', 'TIME', 'STOP']
 
 
 def detect(command: str):

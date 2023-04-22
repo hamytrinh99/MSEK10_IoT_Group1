@@ -65,6 +65,9 @@ try:
             elif intent == 'WEATHER':
                 actions.check_weather()
                 time.sleep(5)
+            elif intent == 'TIME':
+                actions.check_time()
+                time.sleep(5)
             elif intent == 'STOP':
                 actions.stop_everything()
             else:

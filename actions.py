@@ -10,6 +10,11 @@ import config
 import db
 import voice
 
+import datetime
+import pytz
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
 
 def play_music():
     files = os.listdir('./music')
@@ -72,6 +77,22 @@ def check_weather():
     except:
         traceback.print_exc()
         voice.speak('Hic em không lấy được thông tin thời tiết ạ')
+
+
+def check_time():
+    try:
+        creds = service_account.Credentials.from_service_account_file('venv/key/iot-2023-384204-8d3335760c90.json')
+        service = build('calendar', 'v3', credentials=creds)
+        now_utc = datetime.datetime.now(tz=pytz.utc)
+        now_local = now_utc.astimezone(pytz.timezone('Asia/Ho_Chi_Minh'))
+        time_str = now_local.strftime('%H:%M:%S')
+
+        text = f"Giờ hiện tại là {time_str}"
+        voice.speak(text)
+    except:
+        traceback.print_exc()
+        voice.speak('Hic em không biết bây giờ là mấy giờ ạ')
+
 
 
 def stop_everything():
